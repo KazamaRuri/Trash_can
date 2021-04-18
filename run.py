@@ -8,7 +8,7 @@ from PIL import Image
 model = keras.models.load_model('Trash_model')
 # model = keras.models.load_model('Trash_model.h5')
 
-img = np.array(Image.open('test.jpg'))
+img = np.array(Image.open('test2.jpg'))
 # plt.imshow(img)
 # plt.show()
 
