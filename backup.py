@@ -2,21 +2,6 @@ import  tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow import keras
 import numpy as np
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-train_datagen = ImageDataGenerator(rescale=1/255)
-validation_datagen = ImageDataGenerator(rescale=1/255)
-
-train_generator = train_datagen.flow_from_directory(
-    'D:/ruri/Projects/Python/Tensorflow/train',
-    target_size=(128,128),
-    batch_size=32
-)
-validation_generator = validation_datagen.flow_from_directory(
-    'D:/ruri/Projects/Python/Tensorflow/validation',
-    target_size=(128,128),
-    batch_size=32
-)
 
 class myCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self,epoch,logs={}):
@@ -25,10 +10,10 @@ class myCallback(tf.keras.callbacks.Callback):
             self.model.stop_training=True
 callbacks = myCallback()
 
-#fashion_mnist = keras.datasets.fashion_mnist
-#(train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
-#train_images_scaled=train_images/255
-#test_images_scaled=test_images/255
+fashion_mnist = keras.datasets.fashion_mnist
+(train_images,train_labels),(test_images,test_labels) = fashion_mnist.load_data()
+train_images_scaled=train_images/255
+test_images_scaled=test_images/255
 
 #-----------------------------------------------
 
@@ -50,9 +35,9 @@ model.fit(train_generator,epochs=5)
 
 #----------------------------------------
 
-model.evaluate(validation_generator)
-##print(np.argmax(model.predict(test_images_scaled[8].reshape(1,28,28,1))))
-##print(test_labels[8])
+# model.evaluate(validation_generator)
+print(np.argmax(model.predict(test_images_scaled[8].reshape(1,28,28,1))))
+print(test_labels[8])
 
-#plt.imshow(train_generator[1,:,:,:])
-#plt.show()
+plt.imshow(train_generator[1,:,:,:])
+plt.show()
